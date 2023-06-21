@@ -92,24 +92,10 @@ def handle_pkt(pkt, iface):
         
         p_buf_dic[seq_number] = [pkt,[0,0,0,0]]
         expecting_ack = seq_number
-        
-
-        """
-        p_buf.append((pkt, seq_number))
-        last_packet = p_buf[-1]  # Get the last tuple in p_buf
-        last_seq_number = last_packet[1]  # Retrieve the sequence number from the tuple
-        """
-
-        #print("Sequence number of the last packet: ", seq_number)
-        #p_buf_dic[seq_number][0].show()
-        #sys.stdout.flush()
-        
+             
     elif pkt[Ether].type == 0x1234 and pkt[Update].op == UpdateOpcodeEnum.ACK.value:  
-        #print("received ack: ") 
-        #pkt.show2()
         set_ack(pkt, iface)
-        #sys.stdout.flush()
-
+      
 
 
 

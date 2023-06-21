@@ -14,4 +14,7 @@ There are also 2 sketches called merge and sync, which will be explained later o
 There is one host in the network (called controller), which is connected to all switches. since it is not possible to have a timer in bmv2 software switches, this host sends an ethernet packet ( with ether type 0x1234) to other switches to initiate the window advancement procedure (timer.py). It is possible to add other timers for having a more fine-grained control over the window advancement procedure. 
 
 
+
 Upon receiving the timer packet from the controller, each switch clones and recirculates the packet, and then copies the local update sketch into the sync sketch index by index, sets the local update registers back to zero, and multicasts the updates index by index. After receiving all updates and acks from other switches, the sync sketch and the sketches for other switches are added to the merge sketch, and the window is advanced. While the window advancement procedure is in process, new updates are added to the local update sketch.
+
+There is also a script called "probe.py", which will send a "probe" packet from the host to the switch. the switch then adds up all sketches and sends them back to the host index by index. (the receive.py script should be running as well)

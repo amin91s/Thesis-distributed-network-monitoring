@@ -10,6 +10,8 @@ After receiving an update, the switch will increment the indices in the sketch a
 
 acknowledgments are sent to the controller, which after receiving all acks would send the buffered packet back to the switch to be forwarded. The switch now counts the packet in the local CMS.
 
+There is also a script called "probe.py", which will send a "probe" packet from the host to the switch. the switch then adds up all sketches and sends them back to the host index by index. (the receive.py script should be running as well)
+
 ### note:
 For this implementation, a host is used as the controller for each switch, as using the CPU port and grpc would randomly crash the virtual machine on my system. 
 
