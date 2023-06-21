@@ -1,0 +1,22 @@
+#define CMS_ENTRIES 16
+#define CMS_CELL_WIDTH 32
+#define L1_HASH_ALG crc16
+#define L2_HASH_ALG crc32
+#define L3_HASH_ALG identity
+#define CREATE_REGISTER(name, cell_width, size) register<bit<cell_width>>(size) name
+#define HOST_PORT 1
+#define BATCH_SIZE 3
+
+#define PKT_INSTANCE_TYPE_NORMAL 0
+#define PKT_INSTANCE_TYPE_INGRESS_CLONE 1
+#define PKT_INSTANCE_TYPE_EGRESS_CLONE 2
+#define PKT_INSTANCE_TYPE_COALESCED 3
+#define PKT_INSTANCE_TYPE_INGRESS_RECIRC 4
+#define PKT_INSTANCE_TYPE_REPLICATION 5
+#define PKT_INSTANCE_TYPE_RESUBMIT 6
+
+
+
+
+
+
