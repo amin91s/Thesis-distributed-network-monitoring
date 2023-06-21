@@ -3,8 +3,8 @@
 ## high-level overview of the replication protocol
 ![sync-proto](./ewo-proto.png)
 
-
-Each switch contains a CMS (consisting of 3 registers) for tracking local updates, as well as one sketch per switch in the topology.
+## Brief Explanation:
+Each switch contains a CMS (consisting of 3 registers) for tracking local updates, as well as one sketch per switch in the network.
 There is also a register called "packet_count" on each switch, which is used to track the number of received packets.
 When a packet is received from the host (on port 1), it is added to the local sketch, and the packet counter is incremented. if the counter reaches the pre-defined batch size (in includes/defines.p4), the local sketch will be synchronized between switches.
 The synchronization protocol clones and recirculates the cloned TCP packet and changes it to a replication packet (called update packet) which will be used to multicast the local CMS index by index to other switches.
