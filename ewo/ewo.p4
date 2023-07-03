@@ -156,7 +156,7 @@ control MyIngress(inout headers hdr,
         else if (hdr.ipv4.isValid()) {
             
             if(hdr.tcp.isValid() ){
-                //why this does not stop counting flows on the destination switch?
+                
                 if(standard_metadata.ingress_port == (egressSpec_t) HOST_PORT){
                     //log_msg("adding msg from port {} to local cms",{standard_metadata.ingress_port});
                     update_local_cms();
