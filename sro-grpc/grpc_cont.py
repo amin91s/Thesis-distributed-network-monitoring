@@ -8,7 +8,7 @@ import ptf.testutils as tu
 import grpc
 
 # Import P4Runtime lib from parent utils dir
-# Probably there's a better way of doing this.
+
 sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../utils/'))
 import p4runtime_lib.bmv2
 import p4runtime_lib.helper
@@ -19,32 +19,6 @@ switchId = 0
 switch_A = 0
 switch_B = 0
 seq_number = 0
-
-def readTableRules(p4info_helper, sw):
-    """
-    Reads the table entries from all tables on the switch.
-
-    :param p4info_helper: the P4Info helper
-    :param sw: the switch connection
-    """
-    print('\n----- Reading tables rules for %s -----' % sw.name)
-    for response in sw.ReadTableEntries():
-        for entity in response.entities:
-            entry = entity.table_entry
-            # TODO For extra credit, you can use the p4info_helper to translate
-            #      the IDs in the entry to names
-            table_name = p4info_helper.get_tables_name(entry.table_id)
-            print('%s: ' % table_name, end=' ')
-            for m in entry.match:
-                print(p4info_helper.get_match_field_name(table_name, m.field_id), end=' ')
-                print('%r' % (p4info_helper.get_match_field_value(m),), end=' ')
-            action = entry.action.action
-            action_name = p4info_helper.get_actions_name(action.action_id)
-            print('->', action_name, end=' ')
-            for p in action.params:
-                print(p4info_helper.get_action_param_name(action_name, p.param_id), end=' ')
-                print('%r' % p.value, end=' ')
-            print()
 
 class UpdateOpcodeEnum(Enum):
     UPDATE = 0
@@ -132,7 +106,7 @@ def main(p4info_file_path, bmv2_file_path, sid, port, seq):
         # Send master arbitration update message to establish this controller as
         # master (required by P4Runtime before performing any other write operation)
         s.MasterArbitrationUpdate()
-        #readTableRules(p4info_helper, s1)
+        
 
         if args.seq >= 0:
             send_cpu_pkt(2,seq,p4info_helper,s)
