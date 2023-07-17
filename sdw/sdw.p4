@@ -81,7 +81,6 @@ control MyIngress(inout headers hdr,
 
     
     action send_update(){
-        //todo: fix
         switch_id.read(hdr.update.switch_id, 0);
         window.read(hdr.update.window,0);
         bit<32> r = meta.update_meta.recirculation_round;  
@@ -232,8 +231,6 @@ control MyIngress(inout headers hdr,
                 ack_count.read(tmp_ack,0);
                 if(tmp_ack == NUM_SWITCHES_IN_TOPO && tmp_upd == NUM_SWITCHES_IN_TOPO){
                     advance_window();
-                    bit<32> win;
-                    window.read(win,0);
                 }
                 drop();
             }
@@ -284,7 +281,6 @@ control MyIngress(inout headers hdr,
                     
                 }
                 updateOpcode_t.UPDATE:{
-                    //TODO: implement check to see if window is correct
                         switch(hdr.update.switch_id){
                             1:{UPDATE(1);INCREMENT_UPDATE_CNT(1);}
                             2:{UPDATE(2);INCREMENT_UPDATE_CNT(2);}
